@@ -1,12 +1,9 @@
 import { Typography } from "@mui/material";
-import { FunctionComponent } from "react";
 
-interface ContactPageProps {
-    
+export default function ContactPage() {
+    return (
+        <Typography variant='h2'>
+            Contact page
+        </Typography>
+    )
 }
- 
-const ContactPage: FunctionComponent<ContactPageProps> = () => {
-    return ( <Typography variant="h2">Contact Page</Typography> );
-}
- 
-export default ContactPage;

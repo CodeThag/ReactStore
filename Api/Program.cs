@@ -1,6 +1,5 @@
 using System;
-using System.Threading.Tasks;
-using Api.Data;
+using API.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,22 +10,20 @@ namespace API
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
             using var scope = host.Services.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<StoreContext>();
             var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-
-            try
+            try 
             {
                 context.Database.Migrate();
-                await DbInitializer.Initialize(context);
+                DbInitializer.Initialize(context);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Problem migrating data...");
-                throw;
+                logger.LogError(ex, "Problem migrating data");
             }
 
             host.Run();

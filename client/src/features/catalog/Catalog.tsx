@@ -1,23 +1,25 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import agent from "../../app/api/agent";
+import LoadingComponent from "../../app/layout/LoadingComponent";
 import { Product } from "../../app/models/product";
 import ProductList from "./ProductList";
 
-
-const Catalog: FunctionComponent = () => {
+export default function Catalog() {
     const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('https://localhost:7121/api/products').then(response => response.json())
-            .then(data => setProducts(data));
-        // An empty array means this useEffect will be called once
-        // If not parameter is passed, useEffect will be called after page render and be called again in cyclical way.
-        // changable dependencies can be put here. like url parameter, calling functions etc.
-    }, []);
+        agent.Catalog.list()
+            .then(products => setProducts(products))
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
+    }, [])
+
+    if (loading) return <LoadingComponent message='Loading products...' />
 
     return (
         <>
             <ProductList products={products} />
-        </>);
+        </>
+    )
 }
-
-export default Catalog;
