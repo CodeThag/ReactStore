@@ -3,14 +3,16 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220712220719_IdentityAdded")]
+    partial class IdentityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +26,9 @@ namespace API.Data.Migrations
 
                     b.Property<string>("BuyerId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -178,15 +183,15 @@ namespace API.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c7c91742-37e0-4e0d-b56b-58b868ba4b37",
-                            ConcurrencyStamp = "fd91ae18-1707-4d50-a9b6-e64326173647",
+                            Id = "2282a429-6a27-44d7-a139-3ff911ad3867",
+                            ConcurrencyStamp = "5ad10b0f-e431-401d-85c4-9c2d6c3c37cd",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "53a5cc07-dfe2-4e67-984f-d2fd27c2e057",
-                            ConcurrencyStamp = "aeb94e6d-2701-4c26-b3d8-123aa333c649",
+                            Id = "cf4ca982-708f-40da-b711-c371a0eba8b2",
+                            ConcurrencyStamp = "6ae9638b-32d2-47eb-99b8-fb59db303afd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
